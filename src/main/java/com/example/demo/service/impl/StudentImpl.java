@@ -15,12 +15,22 @@ public class StudentImpl implements StudentService {
     @Override
     public void add(Student student) {
         studentMapper.insertStudent(student);
-
     }
 
     @Override
     public void delete(String id) {
         studentMapper.deleteStudentById(id);
+    }
+
+    @Override
+    public void update(Student student) {
+        studentMapper.updateStudent(student);
+    }
+
+    @Override
+    public Student search(String id) {
+        Student student = studentMapper.searchStudentById(id);
+        return student;
     }
 
 }

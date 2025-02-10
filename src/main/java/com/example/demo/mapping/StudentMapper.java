@@ -1,9 +1,7 @@
 package com.example.demo.mapping;
 
 import com.example.demo.entity.Student;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface StudentMapper {
@@ -13,4 +11,11 @@ public interface StudentMapper {
     //删除记录
     @Delete("DELETE FROM student WHERE id = #{id}")
     void deleteStudentById(String id);
+    //更新记录
+    @Update("UPDATE student SET name = #{name}, chinese = #{chinese}, math = #{math}, english = #{english} WHERE id = #{id}")
+    void updateStudent(Student student);
+    // 查询记录
+    @Select("SELECT * FROM student WHERE id = #{id}")
+    Student searchStudentById(String id);
+
 }

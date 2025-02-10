@@ -18,8 +18,22 @@ public class StudentController {
     }
 
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<Void> deleteStudent(@PathVariable String id){
+    public ResponseEntity<Void> deleteStudent(@PathVariable(value ="id") String id){
         studentService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+    @PostMapping("update")
+    public ResponseEntity<Student> updateStudent(@RequestBody Student student){
+        studentService.update(student);
+        return ResponseEntity.ok(student);
+    }
+    @GetMapping("search/{id}")
+    public ResponseEntity<Student> searchStudent(@PathVariable(value ="id") String id){
+        Student student = studentService.search(id);
+        if(student == null){
+            return ResponseEntity.notFound().build();
+        }else {
+            return ResponseEntity.ok(student);
+        }
     }
 }
