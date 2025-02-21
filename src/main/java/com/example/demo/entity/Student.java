@@ -1,14 +1,16 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import lombok.Data;
 
 @Data
-@Entity
+@TableName(value = "student", schema = "test")
 public class Student {
-    @Id
-    String id;
+    @TableId(type = IdType.AUTO)
+    Integer id;
     String name;
     String chinese;
     String math;

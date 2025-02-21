@@ -7,9 +7,13 @@ import com.example.demo.entity.Student;
 public interface StudentService {
     void add(Student student);
 
-    void delete(String id);
+    void delete(Integer id);
 
     void update(Student student);
 
-    Student search(String id);
+    Student search(Integer id);
+
+    void addStudentRedis(Student student);
+
+    void deleteStudentRedis(Integer id);
 }

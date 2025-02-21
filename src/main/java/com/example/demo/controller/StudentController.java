@@ -18,7 +18,7 @@ public class StudentController {
     }
 
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<Void> deleteStudent(@PathVariable(value ="id") String id){
+    public ResponseEntity<Void> deleteStudent(@PathVariable(value ="id") Integer id){
         studentService.delete(id);
         return ResponseEntity.noContent().build();
     }
@@ -28,7 +28,7 @@ public class StudentController {
         return ResponseEntity.ok(student);
     }
     @GetMapping("search/{id}")
-    public ResponseEntity<Student> searchStudent(@PathVariable(value ="id") String id){
+    public ResponseEntity<Student> searchStudent(@PathVariable(value ="id") Integer id){
         Student student = studentService.search(id);
         if(student == null){
             return ResponseEntity.notFound().build();
@@ -36,4 +36,15 @@ public class StudentController {
             return ResponseEntity.ok(student);
         }
     }
+    @PostMapping("redis/add")
+    public ResponseEntity<Student> addStudentRedis(@RequestBody Student student){
+        studentService.addStudentRedis(student);
+        return ResponseEntity.ok(student);
+    }
+    @PostMapping("redis/delete/{id}")
+    public ResponseEntity<Void> deleteStudentRedis(@PathVariable(value ="id") Integer id){
+        studentService.deleteStudentRedis(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
