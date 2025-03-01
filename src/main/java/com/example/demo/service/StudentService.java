@@ -1,7 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.Student;
-
+import com.example.demo.model.BasicPageResultVO;
+import com.example.demo.model.PageStudent;
 
 
 public interface StudentService {
@@ -16,4 +17,6 @@ public interface StudentService {
     void addStudentRedis(Student student);
 
     void deleteStudentRedis(Integer id);
+
+    BasicPageResultVO getStudentPage(PageStudent pageStudent);
 }

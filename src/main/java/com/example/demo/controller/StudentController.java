@@ -1,10 +1,14 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Student;
+import com.example.demo.model.BasicPageResultVO;
+import com.example.demo.model.PageStudent;
 import com.example.demo.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Base64;
 
 @RestController
 @RequestMapping("student")
@@ -45,6 +49,10 @@ public class StudentController {
     public ResponseEntity<Void> deleteStudentRedis(@PathVariable(value ="id") Integer id){
         studentService.deleteStudentRedis(id);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/list")
+    public ResponseEntity<BasicPageResultVO> deleteStudentRedis(PageStudent PageStudent){
+        return ResponseEntity.ok(studentService.getStudentPage(PageStudent));
     }
 
 }
