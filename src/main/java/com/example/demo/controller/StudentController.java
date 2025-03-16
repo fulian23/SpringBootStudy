@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.ResponseVO;
 import com.example.demo.entity.Student;
 import com.example.demo.model.BasicPageResultVO;
 import com.example.demo.model.PageStudent;
@@ -16,43 +17,43 @@ import java.util.Base64;
 public class StudentController {
     final StudentService studentService;
     @PostMapping("add")
-    public ResponseEntity<Student> addStudent(@RequestBody Student student){
+    public ResponseVO<?> addStudent(@RequestBody Student student){
         studentService.add(student);
-        return ResponseEntity.ok(student);
+        return ResponseVO.SUCCESS();
     }
 
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<Void> deleteStudent(@PathVariable(value ="id") Integer id){
+    public ResponseVO<?> deleteStudent(@PathVariable(value ="id") Integer id){
         studentService.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseVO.SUCCESS();
     }
     @PostMapping("update")
-    public ResponseEntity<Student> updateStudent(@RequestBody Student student){
+    public ResponseVO<?> updateStudent(@RequestBody Student student){
         studentService.update(student);
-        return ResponseEntity.ok(student);
+        return ResponseVO.SUCCESS(student);
     }
     @GetMapping("search/{id}")
-    public ResponseEntity<Student> searchStudent(@PathVariable(value ="id") Integer id){
+    public ResponseVO<?> searchStudent(@PathVariable(value ="id") Integer id){
         Student student = studentService.search(id);
         if(student == null){
-            return ResponseEntity.notFound().build();
+            return ResponseVO.FAIL();
         }else {
-            return ResponseEntity.ok(student);
+            return ResponseVO.SUCCESS(student);
         }
     }
     @PostMapping("redis/add")
-    public ResponseEntity<Student> addStudentRedis(@RequestBody Student student){
+    public ResponseVO<?> addStudentRedis(@RequestBody Student student){
         studentService.addStudentRedis(student);
-        return ResponseEntity.ok(student);
+        return ResponseVO.SUCCESS(student);
     }
     @PostMapping("redis/delete/{id}")
-    public ResponseEntity<Void> deleteStudentRedis(@PathVariable(value ="id") Integer id){
+    public ResponseVO<?> deleteStudentRedis(@PathVariable(value ="id") Integer id){
         studentService.deleteStudentRedis(id);
-        return ResponseEntity.noContent().build();
+        return ResponseVO.SUCCESS();
     }
     @GetMapping("/list")
-    public ResponseEntity<BasicPageResultVO> deleteStudentRedis(PageStudent PageStudent){
-        return ResponseEntity.ok(studentService.getStudentPage(PageStudent));
+    public ResponseVO<?> deleteStudentRedis(PageStudent PageStudent){
+        return ResponseVO.SUCCESS(studentService.getStudentPage(PageStudent));
     }
 
 }
