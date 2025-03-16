@@ -7,6 +7,7 @@ import com.example.demo.model.PageStudent;
 import com.example.demo.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Base64;
@@ -17,7 +18,7 @@ import java.util.Base64;
 public class StudentController {
     final StudentService studentService;
     @PostMapping("add")
-    public ResponseVO<?> addStudent(@RequestBody Student student){
+    public ResponseVO<?> addStudent(@RequestBody @Validated Student student){
         studentService.add(student);
         return ResponseVO.SUCCESS();
     }
@@ -28,7 +29,7 @@ public class StudentController {
         return ResponseVO.SUCCESS();
     }
     @PostMapping("update")
-    public ResponseVO<?> updateStudent(@RequestBody Student student){
+    public ResponseVO<?> updateStudent(@RequestBody @Validated Student student){
         studentService.update(student);
         return ResponseVO.SUCCESS(student);
     }
@@ -42,7 +43,7 @@ public class StudentController {
         }
     }
     @PostMapping("redis/add")
-    public ResponseVO<?> addStudentRedis(@RequestBody Student student){
+    public ResponseVO<?> addStudentRedis(@RequestBody @Validated Student student){
         studentService.addStudentRedis(student);
         return ResponseVO.SUCCESS(student);
     }
